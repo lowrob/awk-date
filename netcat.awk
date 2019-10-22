@@ -11,10 +11,8 @@ BEGIN {
 
   BINMODE = "rw"
   HttpService = "/inet/tcp/" Port "/0/0"
-  CatPipe    = ("cat " FILE)    # sets $0 and the fields
-  while(( CatPipe | getline) > 0 ) {
+  while(( getline < FILE ) > 0 ) {
     print $0 |& HttpService 
   }
-  print $0 |& HttpService 
   close(HttpService)
 }
